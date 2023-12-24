@@ -1,0 +1,37 @@
+//Temperature sensox connected CO GPIO pin PE2 (ANI 1)
+GPIO_PORTE_DEN_R &= ~PORTE_PIN_2;
+GPIO_PORTE_AMSEL_R |= PORTE_PIN_2;
+//Enable the clock for ADCO
+SYSCTL_RCGC_ADC_R |= ADCO_CLOCK_ENABLE;
+Delay(3);
+ADC_PERI_CONFIG_R |= 0x03; //250 Ksps
+ADC_TRIGGER_MUX_R = 0xF000; //250 Ksps
+
+//No Sequencer Priority
+ADC_SAMPLE_AVE_R |= 0x04; //16x oversampling and then averaged
+
+//No Voltage selection
+ADC_ACTIVE_SS_R = 0x00000008;   //Configure ADCO module tor sequencer3
+ADC_SS3_IN_MUX_R =0x01;         // ANI_1 (PE2) 19 assigned to InputO of SS3
+ADC_SS3_CONTROL_R |= 0x02;      // Sample is end of sequence
+
+while (1)
+{
+  Delay (100);
+  //Read the temperature raw value £rom ADC FIFO
+  adc_data = ( ADC_SS3_FIFO_DATA_R & 0xFFF);
+  
+  //Convert the raw value to Celsius scale
+  Temperature = (unsigned char) (((adc_data * 3.3)/4096)* 100);
+  val =  Temperature;
+  Bcd_Val[3]  =  val/1000;
+  val = val - (Bcd_Val[3]*1000);
+  Bcd_Val[2] =  val/100;
+  val = val - (Bcd_Val[2]*100);
+  Bcd_Val[1] =  val/10;
+  val = val - (Bcd_Val[1]*10);
+  
+  
+  
+  
+}
