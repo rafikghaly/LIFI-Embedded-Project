@@ -2864,6 +2864,12 @@
         <name>$PROJ_DIR$\fume.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\laser.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\laser.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\magnetic.c</name>
     </file>
     <file>

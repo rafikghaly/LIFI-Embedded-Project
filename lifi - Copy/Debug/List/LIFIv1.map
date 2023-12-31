@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.30.1.335/W64 for ARM                  23/Dec/2023  19:07:17
+# IAR ELF Linker V9.30.1.335/W64 for ARM                  30/Dec/2023  17:03:20
 # Copyright 2007-2022 IAR Systems AB.
 #
 #    Output file  =  D:\Embedded Systems\lifi - Copy\Debug\Exe\LIFIv1.out
@@ -10,6 +10,7 @@
 #        ("D:\Embedded Systems\lifi - Copy\Debug\Obj\bitwise_operation.o"
 #        "D:\Embedded Systems\lifi - Copy\Debug\Obj\DIO.o" "D:\Embedded
 #        Systems\lifi - Copy\Debug\Obj\fume.o" "D:\Embedded Systems\lifi -
+#        Copy\Debug\Obj\laser.o" "D:\Embedded Systems\lifi -
 #        Copy\Debug\Obj\magnetic.o" "D:\Embedded Systems\lifi -
 #        Copy\Debug\Obj\main.o" "D:\Embedded Systems\lifi -
 #        Copy\Debug\Obj\ultrasonicV1.o" --no_out_extension -o "D:\Embedded
@@ -51,69 +52,85 @@ define block CSTACK with size = 4K, alignment = 8 { };
 define block HEAP with size = 8K, alignment = 8 { };
 "P2":  place in [from 0x2000'0000 to 0x2000'7fff] {
           rw, block CSTACK, block HEAP };
+initialize by copy { rw };
 
-  Section          Kind         Address    Size  Object
-  -------          ----         -------    ----  ------
-"A0":                                      0x40
-  .intvec          ro code          0x0    0x40  vector_table_M.o [4]
-                                 - 0x40    0x40
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                        0x40
+  .intvec            ro code          0x0    0x40  vector_table_M.o [4]
+                                   - 0x40    0x40
 
-"P1":                                     0x92c
-  .text            ro code         0x40   0x278  ultrasonicV1.o [1]
-  .text            ro code        0x2b8     0xc  bitwise_operation.o [1]
-  .text            ro code        0x2c4   0x1b4  main.o [1]
-  .text            ro code        0x478    0x84  fume.o [1]
-  .text            ro code        0x4fc    0x40  magnetic.o [1]
-  .text            ro code        0x53c    0x40  sprintf.o [2]
-  .text            ro code        0x57c   0x114  DIO.o [1]
-  .text            ro code        0x690   0x13c  xprintftiny.o [2]
-  .text            ro code        0x7cc    0x36  strlen.o [4]
-  .text            ro code        0x802    0x38  zero_init3.o [4]
-  .text            ro code        0x83a     0xa  xsprout.o [2]
-  .text            ro code        0x844    0x28  data_init.o [4]
-  .text            ro code        0x86c    0x22  fpinit_M.o [3]
-  .iar.init_table  const          0x890    0x10  - Linker created -
-  .text            ro code        0x8a0     0x2  vectortrap_M.o [4]
-  .text            ro code        0x8a4    0x1e  cmain.o [4]
-  .text            ro code        0x8c2     0x4  low_level_init.o [2]
-  .text            ro code        0x8c6     0x4  exit.o [2]
-  .text            ro code        0x8cc     0xa  cexit.o [4]
-  .text            ro code        0x8d8    0x14  exit.o [5]
-  .text            ro code        0x8ec    0x1c  cstartup_M.o [4]
-  .rodata          const          0x908    0x14  main.o [1]
-  .rodata          const          0x91c    0x10  main.o [1]
-  .rodata          const          0x92c    0x10  main.o [1]
-  .rodata          const          0x93c    0x10  main.o [1]
-  .rodata          const          0x94c    0x10  main.o [1]
-  .rodata          const          0x95c    0x10  main.o [1]
-  .rodata          const          0x96c     0x0  zero_init3.o [4]
-                                - 0x96c   0x92c
+"P1":                                       0xba4
+  .text              ro code         0x40   0x278  main.o [1]
+  .text              ro code        0x2b8    0x84  fume.o [1]
+  .text              ro code        0x33c    0x40  magnetic.o [1]
+  .text              ro code        0x37c   0x278  ultrasonicV1.o [1]
+  .text              ro code        0x5f4    0x44  laser.o [1]
+  .text              ro code        0x638    0x1c  bitwise_operation.o [1]
+  .text              ro code        0x654    0x40  sprintf.o [2]
+  .text              ro code        0x694    0x28  printf.o [2]
+  .text              ro code        0x6bc   0x114  DIO.o [1]
+  .text              ro code        0x7d0   0x13c  xprintftiny.o [2]
+  .text              ro code        0x90c    0x36  strlen.o [4]
+  .text              ro code        0x942    0x3a  packbits_init_single.o [4]
+  .text              ro code        0x97c    0x7c  iarttio.o [5]
+  .text              ro code        0x9f8     0x8  XShttio.o [2]
+  .text              ro code        0xa00    0x28  data_init.o [4]
+  .text              ro code        0xa28    0x22  fpinit_M.o [3]
+  .text              ro code        0xa4a    0x22  iarwrite.o [5]
+  .iar.init_table    const          0xa6c    0x10  - Linker created -
+  .text              ro code        0xa7c    0x20  putchar.o [2]
+  .text              ro code        0xa9c    0x10  write.o [5]
+  .text              ro code        0xaac    0x1e  dwrite.o [5]
+  .text              ro code        0xaca    0x20  iarwstd.o [5]
+  .text              ro code        0xaea     0xa  xsprout.o [2]
+  .text              ro code        0xaf4    0x1e  cmain.o [4]
+  .text              ro code        0xb12     0x4  low_level_init.o [2]
+  .text              ro code        0xb16     0x4  exit.o [2]
+  .text              ro code        0xb1a     0x2  vectortrap_M.o [4]
+  .text              ro code        0xb1c     0xa  cexit.o [4]
+  .text              ro code        0xb28    0x14  exit.o [5]
+  .text              ro code        0xb3c    0x1c  cstartup_M.o [4]
+  .text              ro code        0xb58    0x16  xprout.o [2]
+  .rodata            const          0xb70    0x14  main.o [1]
+  .rodata            const          0xb84    0x10  main.o [1]
+  .rodata            const          0xb94    0x10  main.o [1]
+  .rodata            const          0xba4    0x10  main.o [1]
+  .rodata            const          0xbb4    0x10  main.o [1]
+  .rodata            const          0xbc4    0x10  main.o [1]
+  .rodata            const          0xbd4     0xc  main.o [1]
+  .rodata            const          0xbe0     0x0  packbits_init_single.o [4]
+  Initializer bytes  const          0xbe0     0x4  <for P2-1>
+                                  - 0xbe4   0xba4
 
-"P2", part 1 of 2:                         0x2c
-  .bss             zero     0x2000'0000    0x14  main.o [1]
-  .bss             zero     0x2000'0014     0x4  main.o [1]
-  .bss             zero     0x2000'0018     0x4  main.o [1]
-  .bss             zero     0x2000'001c     0x4  main.o [1]
-  .bss             zero     0x2000'0020     0x4  main.o [1]
-  .bss             zero     0x2000'0024     0x4  main.o [1]
-  .bss             zero     0x2000'0028     0x1  main.o [1]
-  .bss             zero     0x2000'0029     0x1  main.o [1]
-  .bss             zero     0x2000'002a     0x1  main.o [1]
-  .bss             zero     0x2000'002b     0x1  main.o [1]
-                          - 0x2000'002c    0x2c
+"P2", part 1 of 2:                           0x35
+  P2-1                        0x2000'0000    0x35  <Init block>
+    .data            inited   0x2000'0000     0x8  XShttio.o [2]
+    .bss             inited   0x2000'0008     0x4  main.o [1]
+    .bss             inited   0x2000'000c     0x4  main.o [1]
+    .bss             inited   0x2000'0010    0x14  main.o [1]
+    .bss             inited   0x2000'0024     0x4  main.o [1]
+    .bss             inited   0x2000'0028     0x4  main.o [1]
+    .bss             inited   0x2000'002c     0x4  main.o [1]
+    .bss             inited   0x2000'0030     0x1  main.o [1]
+    .bss             inited   0x2000'0031     0x1  main.o [1]
+    .bss             inited   0x2000'0032     0x1  main.o [1]
+    .bss             inited   0x2000'0033     0x1  main.o [1]
+    .bss             inited   0x2000'0034     0x1  main.o [1]
+                            - 0x2000'0035    0x35
 
-"P2", part 2 of 2:                       0x1000
-  CSTACK                    0x2000'0030  0x1000  <Block>
-    CSTACK         uninit   0x2000'0030  0x1000  <Block tail>
-                          - 0x2000'1030  0x1000
+"P2", part 2 of 2:                         0x1000
+  CSTACK                      0x2000'0038  0x1000  <Block>
+    CSTACK           uninit   0x2000'0038  0x1000  <Block tail>
+                            - 0x2000'1038  0x1000
 
 Unused ranges:
 
          From           To      Size
          ----           --      ----
-        0x96c     0x3'ffff  0x3'f694
-  0x2000'002c  0x2000'002f       0x4
-  0x2000'1030  0x2000'7fff    0x6fd0
+        0xbe4     0x3'ffff  0x3'f41c
+  0x2000'0035  0x2000'0037       0x3
+  0x2000'1038  0x2000'7fff    0x6fc8
 
 
 *******************************************************************************
@@ -122,9 +139,11 @@ Unused ranges:
 
           Address      Size
           -------      ----
-Zero (__iar_zero_init3)
-    1 destination range, total size 0x2c:
-          0x2000'0000  0x2c
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x4 (7% of destination):
+                0xbe0   0x4
+    1 destination range, total size 0x35:
+          0x2000'0000  0x35
 
 
 
@@ -132,57 +151,67 @@ Zero (__iar_zero_init3)
 *** MODULE SUMMARY
 ***
 
-    Module               ro code  ro data  rw data
-    ------               -------  -------  -------
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
 command line/config:
-    ----------------------------------------------
+    -------------------------------------------------
     Total:
 
 D:\Embedded Systems\lifi - Copy\Debug\Obj: [1]
-    DIO.o                    276
-    bitwise_operation.o       12
-    fume.o                   132
-    magnetic.o                64
-    main.o                   436      100       44
-    ultrasonicV1.o           632
-    ----------------------------------------------
-    Total:                 1'552      100       44
+    DIO.o                       276
+    bitwise_operation.o          28
+    fume.o                      132
+    laser.o                      68
+    magnetic.o                   64
+    main.o                      632      116       45
+    ultrasonicV1.o              632
+    -------------------------------------------------
+    Total:                    1'832      116       45
 
 dl7M_tln.a: [2]
-    exit.o                     4
-    low_level_init.o           4
-    sprintf.o                 64
-    xprintftiny.o            316
-    xsprout.o                 10
-    ----------------------------------------------
-    Total:                   398
+    XShttio.o                     8                 8
+    exit.o                        4
+    low_level_init.o              4
+    printf.o                     40
+    putchar.o                    32
+    sprintf.o                    64
+    xprintftiny.o               316
+    xprout.o                     22
+    xsprout.o                    10
+    -------------------------------------------------
+    Total:                      500                 8
 
 m7M_tls.a: [3]
-    fpinit_M.o                34
-    ----------------------------------------------
-    Total:                    34
+    fpinit_M.o                   34
+    -------------------------------------------------
+    Total:                       34
 
 rt7M_tl.a: [4]
-    cexit.o                   10
-    cmain.o                   30
-    cstartup_M.o              28
-    data_init.o               40
-    strlen.o                  54
-    vector_table_M.o          64
-    vectortrap_M.o             2
-    zero_init3.o              56
-    ----------------------------------------------
-    Total:                   284
+    cexit.o                      10
+    cmain.o                      30
+    cstartup_M.o                 28
+    data_init.o                  40
+    packbits_init_single.o       58
+    strlen.o                     54
+    vector_table_M.o             64
+    vectortrap_M.o                2
+    -------------------------------------------------
+    Total:                      286
 
 shb_l.a: [5]
-    exit.o                    20
-    ----------------------------------------------
-    Total:                    20
+    dwrite.o                     30
+    exit.o                       20
+    iarttio.o                   124
+    iarwrite.o                   34
+    iarwstd.o                    32
+    write.o                      16
+    -------------------------------------------------
+    Total:                      256
 
-    Gaps                       6        2
-    Linker created                     16    4'096
---------------------------------------------------
-    Grand Total:           2'294      118    4'140
+    Gaps                          2        2
+    Linker created                        16    4'096
+-----------------------------------------------------
+    Grand Total:              2'910      134    4'149
 
 
 *******************************************************************************
@@ -191,62 +220,79 @@ shb_l.a: [5]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-.iar.init_table$$Base         0x890          --   Gb  - Linker created -
-.iar.init_table$$Limit        0x8a0          --   Gb  - Linker created -
-?main                         0x8a5         Code  Gb  cmain.o [4]
-Bluetooth_Write               0x1e1   0x10  Code  Gb  ultrasonicV1.o [1]
-Bluetooth_Write_String        0x28d   0x16  Code  Gb  ultrasonicV1.o [1]
-BusFault_Handler              0x8a1         Code  Wk  vectortrap_M.o [4]
-CSTACK$$Base            0x2000'0030          --   Gb  - Linker created -
-CSTACK$$Limit           0x2000'1030          --   Gb  - Linker created -
-DIO_Init                      0x57d   0xd8  Code  Gb  DIO.o [1]
-DebugMon_Handler              0x8a1         Code  Wk  vectortrap_M.o [4]
-Delay                         0x2a3   0x16  Code  Gb  ultrasonicV1.o [1]
-Delay_MicroSecond             0x117   0x48  Code  Gb  ultrasonicV1.o [1]
-FlagF                   0x2000'002a    0x1  Data  Gb  main.o [1]
-FlagM                   0x2000'002b    0x1  Data  Gb  main.o [1]
-FlagU                   0x2000'0029    0x1  Data  Gb  main.o [1]
-FumeInit                      0x479   0x5c  Code  Gb  fume.o [1]
-GET_BIT                       0x2b9    0xc  Code  Gb  bitwise_operation.o [1]
-HardFault_Handler             0x8a1         Code  Wk  vectortrap_M.o [4]
-Measure_distance               0x41   0x52  Code  Gb  ultrasonicV1.o [1]
-MemManage_Handler             0x8a1         Code  Wk  vectortrap_M.o [4]
-NMI_Handler                   0x8a1         Code  Wk  vectortrap_M.o [4]
-PendSV_Handler                0x8a1         Code  Wk  vectortrap_M.o [4]
-Region$$Table$$Base           0x890          --   Gb  - Linker created -
-Region$$Table$$Limit          0x8a0          --   Gb  - Linker created -
-SVC_Handler                   0x8a1         Code  Wk  vectortrap_M.o [4]
-SysTick_Handler               0x8a1         Code  Wk  vectortrap_M.o [4]
-TimeF                   0x2000'0024    0x4  Data  Gb  main.o [1]
-TimeM                   0x2000'0020    0x4  Data  Gb  main.o [1]
-TimeU                   0x2000'001c    0x4  Data  Gb  main.o [1]
-Timer0ACapture_init            0x93   0x84  Code  Gb  ultrasonicV1.o [1]
-UART5_init                    0x189   0x58  Code  Gb  ultrasonicV1.o [1]
-UsageFault_Handler            0x8a1         Code  Wk  vectortrap_M.o [4]
-_PrintfTiny                   0x6a9  0x124  Code  Gb  xprintftiny.o [2]
-_SProut                       0x83b    0xa  Code  Gb  xsprout.o [2]
-__cmain                       0x8a5         Code  Gb  cmain.o [4]
-__exit                        0x8d9   0x14  Code  Gb  exit.o [5]
-__iar_data_init3              0x845   0x28  Code  Gb  data_init.o [4]
-__iar_init_vfp                0x86d         Code  Gb  fpinit_M.o [3]
-__iar_program_start           0x8ed         Code  Gb  cstartup_M.o [4]
-__iar_zero_init3              0x803   0x38  Code  Gb  zero_init3.o [4]
-__low_level_init              0x8c3    0x4  Code  Gb  low_level_init.o [2]
+.iar.init_table$$Base         0xa6c          --   Gb  - Linker created -
+.iar.init_table$$Limit        0xa7c          --   Gb  - Linker created -
+?main                         0xaf5         Code  Gb  cmain.o [4]
+Bluetooth_Write               0x51d   0x10  Code  Gb  ultrasonicV1.o [1]
+Bluetooth_Write_String        0x5c9   0x16  Code  Gb  ultrasonicV1.o [1]
+BusFault_Handler              0xb1b         Code  Wk  vectortrap_M.o [4]
+CLEAR_BIT                     0x645   0x10  Code  Gb  bitwise_operation.o [1]
+CSTACK$$Base            0x2000'0038          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'1038          --   Gb  - Linker created -
+DIO_Init                      0x6bd   0xd8  Code  Gb  DIO.o [1]
+DebugMon_Handler              0xb1b         Code  Wk  vectortrap_M.o [4]
+Delay                         0x5df   0x16  Code  Gb  ultrasonicV1.o [1]
+Delay_MicroSecond             0x453   0x48  Code  Gb  ultrasonicV1.o [1]
+FlagF                   0x2000'0032    0x1  Data  Gb  main.o [1]
+FlagM                   0x2000'0033    0x1  Data  Gb  main.o [1]
+FlagON                  0x2000'0034    0x1  Data  Gb  main.o [1]
+FlagU                   0x2000'0031    0x1  Data  Gb  main.o [1]
+FumeInit                      0x2b9   0x5c  Code  Gb  fume.o [1]
+GET_BIT                       0x639    0xc  Code  Gb  bitwise_operation.o [1]
+HardFault_Handler             0xb1b         Code  Wk  vectortrap_M.o [4]
+Measure_distance              0x37d   0x52  Code  Gb  ultrasonicV1.o [1]
+MemManage_Handler             0xb1b         Code  Wk  vectortrap_M.o [4]
+NMI_Handler                   0xb1b         Code  Wk  vectortrap_M.o [4]
+PendSV_Handler                0xb1b         Code  Wk  vectortrap_M.o [4]
+Region$$Table$$Base           0xa6c          --   Gb  - Linker created -
+Region$$Table$$Limit          0xa7c          --   Gb  - Linker created -
+SVC_Handler                   0xb1b         Code  Wk  vectortrap_M.o [4]
+SysTick_Handler               0xb1b         Code  Wk  vectortrap_M.o [4]
+TimeF                   0x2000'002c    0x4  Data  Gb  main.o [1]
+TimeM                   0x2000'0028    0x4  Data  Gb  main.o [1]
+TimeU                   0x2000'0024    0x4  Data  Gb  main.o [1]
+Timer0ACapture_init           0x3cf   0x84  Code  Gb  ultrasonicV1.o [1]
+UART5_init                    0x4c5   0x58  Code  Gb  ultrasonicV1.o [1]
+UsageFault_Handler            0xb1b         Code  Wk  vectortrap_M.o [4]
+_PrintfTiny                   0x7e9  0x124  Code  Gb  xprintftiny.o [2]
+_Prout                        0xb59   0x16  Code  Gb  xprout.o [2]
+_SProut                       0xaeb    0xa  Code  Gb  xsprout.o [2]
+__cmain                       0xaf5         Code  Gb  cmain.o [4]
+__dwrite                      0xaad   0x1e  Code  Gb  dwrite.o [5]
+__exit                        0xb29   0x14  Code  Gb  exit.o [5]
+__iar_close_ttio              0x97d   0x2c  Code  Gb  iarttio.o [5]
+__iar_data_init3              0xa01   0x28  Code  Gb  data_init.o [4]
+__iar_get_ttio                0x9a9   0x4c  Code  Gb  iarttio.o [5]
+__iar_init_vfp                0xa29         Code  Gb  fpinit_M.o [3]
+__iar_lookup_ttioh            0x9f9    0x8  Code  Gb  XShttio.o [2]
+__iar_packbits_init_single3
+                              0x943   0x3a  Code  Gb  packbits_init_single.o [4]
+__iar_program_start           0xb3d         Code  Gb  cstartup_M.o [4]
+__iar_sh_stdout               0xacb   0x20  Code  Gb  iarwstd.o [5]
+__iar_sh_write                0xa4b   0x22  Code  Gb  iarwrite.o [5]
+__iar_ttio_handles      0x2000'0000    0x8  Data  Lc  XShttio.o [2]
+__low_level_init              0xb13    0x4  Code  Gb  low_level_init.o [2]
 __vector_table                  0x0         Data  Gb  vector_table_M.o [4]
-_call_main                    0x8b1         Code  Gb  cmain.o [4]
-_exit                         0x8cd         Code  Gb  cexit.o [4]
-delay_ms                      0x15f   0x2a  Code  Gb  ultrasonicV1.o [1]
-distance                0x2000'0018    0x4  Data  Gb  main.o [1]
-exit                          0x8c7    0x4  Code  Gb  exit.o [2]
-get_magnetic_status           0x521    0xc  Code  Gb  magnetic.o [1]
-magneticInit                  0x4fd   0x24  Code  Gb  magnetic.o [1]
-main                          0x2c5  0x1b4  Code  Gb  main.o [1]
-mesg                    0x2000'0000   0x14  Data  Gb  main.o [1]
-out                           0x691   0x18  Code  Lc  xprintftiny.o [2]
-sprintf                       0x53d   0x40  Code  Gb  sprintf.o [2]
-status                  0x2000'0028    0x1  Data  Gb  main.o [1]
-strlen                        0x7cd         Code  Gb  strlen.o [4]
-time                    0x2000'0014    0x4  Data  Gb  main.o [1]
+__write                       0xa9d   0x10  Code  Gb  write.o [5]
+_call_main                    0xb01         Code  Gb  cmain.o [4]
+_exit                         0xb1d         Code  Gb  cexit.o [4]
+clear_laser_status            0x61f    0xc  Code  Gb  laser.o [1]
+delay_ms                      0x49b   0x2a  Code  Gb  ultrasonicV1.o [1]
+distance                0x2000'000c    0x4  Data  Gb  main.o [1]
+exit                          0xb17    0x4  Code  Gb  exit.o [2]
+get_magnetic_status           0x361    0xc  Code  Gb  magnetic.o [1]
+laser_Init                    0x5f5   0x1e  Code  Gb  laser.o [1]
+magneticInit                  0x33d   0x24  Code  Gb  magnetic.o [1]
+main                           0x41  0x278  Code  Gb  main.o [1]
+mesg                    0x2000'0010   0x14  Data  Gb  main.o [1]
+out                           0x7d1   0x18  Code  Lc  xprintftiny.o [2]
+printf                        0x695   0x28  Code  Gb  printf.o [2]
+putchar                       0xa7d   0x20  Code  Gb  putchar.o [2]
+set_laser_status              0x613    0xc  Code  Gb  laser.o [1]
+sprintf                       0x655   0x40  Code  Gb  sprintf.o [2]
+status                  0x2000'0030    0x1  Data  Gb  main.o [1]
+strlen                        0x90d         Code  Gb  strlen.o [4]
+time                    0x2000'0008    0x4  Data  Gb  main.o [1]
 
 
 [1] = D:\Embedded Systems\lifi - Copy\Debug\Obj
@@ -255,9 +301,9 @@ time                    0x2000'0014    0x4  Data  Gb  main.o [1]
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
-  2'294 bytes of readonly  code memory
-    118 bytes of readonly  data memory
-  4'140 bytes of readwrite data memory
+  2'910 bytes of readonly  code memory
+    134 bytes of readonly  data memory
+  4'149 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

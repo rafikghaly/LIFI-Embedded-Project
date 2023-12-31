@@ -39,6 +39,11 @@ build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.xcl : COMPILER_X
   flags = "D$:\Embedded$ Systems\lifi$ -$ Copy\fume.c" -o "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\Obj\\" --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.tmp"
   rspfile_name = D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.xcl.rsp
 
+build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.xcl : COMPILER_XCL 
+  xclcommand = -source_file "D$:\Embedded$ Systems\lifi$ -$ Copy\laser.c" -xcl_file "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.xcl" -macro_file "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.tmp" -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\bin\iccarm.exe"
+  flags = "D$:\Embedded$ Systems\lifi$ -$ Copy\laser.c" -o "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\Obj\\" --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.tmp"
+  rspfile_name = D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.xcl.rsp
+
 build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.xcl : COMPILER_XCL 
   xclcommand = -source_file "D$:\Embedded$ Systems\lifi$ -$ Copy\magnetic.c" -xcl_file "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.xcl" -macro_file "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.tmp" -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\bin\iccarm.exe"
   flags = "D$:\Embedded$ Systems\lifi$ -$ Copy\magnetic.c" -o "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\Obj\\" --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.tmp"
@@ -66,6 +71,10 @@ build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi : INDEXER D$
 D$:\Embedded$ Systems\lifi$ -$ Copy\fume.c
   flags = "-out=D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi" -f "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.xcl"
 
+build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.pbi : INDEXER D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.xcl |  $
+D$:\Embedded$ Systems\lifi$ -$ Copy\laser.c
+  flags = "-out=D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.pbi" -f "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.xcl"
+
 build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi : INDEXER D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.xcl |  $
 D$:\Embedded$ Systems\lifi$ -$ Copy\magnetic.c
   flags = "-out=D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi" -f "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.xcl"
@@ -82,16 +91,17 @@ build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1.pbw : MAKEBROW
   flags = "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1.pbd" -output "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1.pbw"
 
 build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part0.pbi : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\bitwise_operation.pbi |  $
-D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\DIO.pbi
-  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part0.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\bitwise_operation.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\DIO.pbi"
+D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\DIO.pbi $
+D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi
+  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part0.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\bitwise_operation.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\DIO.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi"
 
-build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part1.pbi : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi |  $
-D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi
-  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part1.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\fume.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi"
+build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part1.pbi : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.pbi |  $
+D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi $
+D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\main.pbi
+  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part1.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\laser.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\magnetic.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\main.pbi"
 
-build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part2.pbi : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\main.pbi |  $
-D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\ultrasonicV1.pbi
-  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part2.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\main.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\ultrasonicV1.pbi"
+build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part2.pbi : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\ultrasonicV1.pbi
+  flags = -M "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part2.pbi" "D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\ultrasonicV1.pbi"
 
 build D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1.pbd : PDBLINK D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part0.pbi |  $
 D$:\Embedded$ Systems\lifi$ -$ Copy\Debug\BrowseInfo\LIFIv1_part1.pbi $

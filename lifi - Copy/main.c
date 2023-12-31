@@ -1,12 +1,14 @@
 #include"tm4c123gh6pm.h"
 #include"DIO.h"
 #include"stdint.h"
-//
+#include"bitwise_operation.h"
 #include"stdio.h"
 #include"DIO.h"
 #include"fume.h"
 #include"ultrasonicV1.h"
 #include"magnetic.h"
+#include"laser.h"
+
 uint32_t time; /*stores pulse on time */
 uint32_t distance; /* stores measured distance value */
 char mesg[20];  /* string format of distance value */
@@ -18,6 +20,8 @@ _Bool FlagM = 0;
 int TimeU = 0;
 int TimeM = 0;
 int TimeF = 0;
+_Bool FlagON= 0;
+
 
 
 int main(void)
@@ -36,9 +40,26 @@ Timer0ACapture_init();  /*initialize Timer0A in edge edge time */
 //For Bluetooth
 UART5_init(); /* initialize UART5 module to transmit data to computer */
 
+//For Laser
+laser_Init();
 
-while(1)
-  {
+GPIO_PORTB_PUR_R |= 0x80; 
+GPIO_PORTB_DIR_R|=0x0; 
+GPIO_PORTB_DEN_R|=0x80; 
+GPIO_PORTB_PUR_R |= 0x2; 
+GPIO_PORTB_DEN_R|=0x2; 
+clear_laser_status();
+
+while(1){
+
+//  {
+    if(GET_BIT(&GPIO_PORTB_DATA_R,7)==0){
+     
+      FlagON=1;
+    }
+    while(FlagON){
+  // set_laser_status();
+    printf("ASDdddddd");
    Bluetooth_Write_String("hi1");
    /////////////////////UltraSonic/////////////////////////////
    if(TimeU ==0)
@@ -49,8 +70,12 @@ while(1)
   if (distance<20)
   {
     FlagU = 1;
-    //Eb3at Laser
+    set_laser_status();
     //delay
+    delay_ms(1000);
+    delay_ms(100);
+    //clear laser
+   clear_laser_status();
     TimeU = 5;
   }
    }
@@ -61,7 +86,7 @@ while(1)
     Bluetooth_Write_String("\n");
     TimeU--;  
    }
-  //sprintf(mesg, "\r\nDistance = %d cm", distance); /*convert float type distance data into string */
+  //sprintf(mesg, "\r\nDistance = %d cm", distance); /*convert float type distance data into string */  
   //Bluetooth_Write_String(mesg);
   //Bluetooth_Write_String("\n");
   //printstring(mesg); /*transmit data to Mobile */
@@ -80,8 +105,12 @@ while(1)
   {
   //printf("Smoke Detected");
     FlagF = 1;
-    //Eb3at Laser
+    set_laser_status();
     //delay
+    delay_ms(720);
+    //delay_ms(100);
+    //clear laser
+   clear_laser_status();
     TimeF = 10;
   //Bluetooth_Write_String("Smoke Detected");
   //Bluetooth_Write_String("\n");
@@ -107,9 +136,16 @@ while(1)
       // Door is closed
     //printf("Door is opened");
       FlagM = 1;
-      //Eb3at Laser
-      //delay
-      TimeM = 5;
+        //Eb3at Laser
+    set_laser_status();
+    //delay
+    delay_ms(1000);
+    delay_ms(1000);
+    //clear laser
+   clear_laser_status();
+   //delay
+    delay_ms(300);
+    TimeM = 5;
     //Bluetooth_Write_String("Door is opened");
     //Bluetooth_Write_String("\n");
    
@@ -151,6 +187,12 @@ if (FlagU && (FlagF == 0) && (FlagM == 0))
 }
   
   
-  
-} 
+    
+
+if (GET_BIT(&GPIO_PORTB_DATA_R,1)==0)
+{
+  FlagON=0;
+}
+    }
+}
 }

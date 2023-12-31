@@ -3,6 +3,7 @@ D:\Embedded\ Systems\lifi\ -\ Copy\Debug\BrowseInfo\main.pbi: \
   D:\Embedded\ Systems\lifi\ -\ Copy\tm4c123gh6pm.h \
   D:\Embedded\ Systems\lifi\ -\ Copy\DIO.h \
   D:\Embedded\ Systems\lifi\ -\ Copy\stdint.h \
+  D:\Embedded\ Systems\lifi\ -\ Copy\bitwise_operation.h \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 9.1\arm\inc\c\stdio.h \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 9.1\arm\inc\c\ycheck.h \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 9.1\arm\inc\c\yvals.h \
@@ -12,4 +13,5 @@ D:\Embedded\ Systems\lifi\ -\ Copy\Debug\BrowseInfo\main.pbi: \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 9.1\arm\inc\c\ysizet.h \
   D:\Embedded\ Systems\lifi\ -\ Copy\fume.h \
   D:\Embedded\ Systems\lifi\ -\ Copy\ultrasonicV1.h \
-  D:\Embedded\ Systems\lifi\ -\ Copy\magnetic.h
+  D:\Embedded\ Systems\lifi\ -\ Copy\magnetic.h \
+  D:\Embedded\ Systems\lifi\ -\ Copy\laser.h
